@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>SVG Tool</title>
+	<link rel="stylesheet" href="css/style.css" type="text/css" media="screen" title="no title" charset="utf-8"/>
+	<script src="js/jquery-1.9.1.min.js" type="text/javascript"></script>
+        <script src="js/svg-converter.js" type="text/javascript"></script>
+</head>
+<body>
+    <div class="shell">
+        <header class="g-block">
+            <div class="logo">SVG Tool</div>
+            <a class="more-info" href="#!" id="btn-tool-info">Info</a>
+        </header>
+
+        <div class="g-block tool-info" id="tool-info">
+            <div class="close-btn" id="btn-info-close"></div>
+            <p>This tool helps you easily generate css for embedding images with svg/xml data</p>
+            <p>This tool will:</p>
+                <ul>
+                    <li>only accept .svg files</li>
+                    <li>use the filename as the class name</li>
+                    <li>generate a fallback png's in a package for old ie</li>
+                </ul>
+
+            <p>You will:</p>
+                <ul>
+                    <li>make sure filenames are class name friendly</li>
+                    <li>images are in needed size and colours.<br>The tool generates the fallback based on the size/colour attributes of the svg it is given.</li>
+
+                </ul>
+
+        </div>
+
+        <form id="svg-data" name="svg-data" method="post" action="php/svg-converter.php">
+        <div class="step-num g-block">
+            <h2>1</h2>
+        </div>
+        <div id="drop_zone" class=" g-block">
+            <p class="state-1">Start by dragging svg images onto the page</p>
+            <p class="state-2">Drag More svg's Onto The Page</p>
+        </div>
+        <div class="step-num g-block">
+            <h2>2</h2>
+        </div>
+        <div class="step-2-info g-block" id="step-2-info">
+            <p class="state-1">Svg Images appear below</p>
+            <p class="state-2">Choose Which svg's You Want</p>
+        </div>
+        <div id="data" class="g-block">
+        </div>
+        <div class="step-num g-block">
+            <h2>3</h2>
+        </div>
+
+        <div class="package-options g-block" id="package-options">
+            <p class="state-1">Set Your Package Options <i title="Not just yet, where are the SVGs?">and Download</i></p>
+            <p class="state-2">Set Your Package Options & Download</p>
+
+            div#package-options
+            <fieldset>
+                    <label class="description">I want my data encoded as:</label>
+                    <input id="en_utf8" type="radio" name="encoding" value="utf8" checked /><label for="en_utf8">utf8 | </label>
+                    <input id="en_base64" type="radio" name="encoding" value="base64" /><label for="en_base64">base64 | </label>
+                    <input id="en_url" type="radio" name="encoding" value="url" /><label for="en_url">uri</label>
+                </fieldset>
+
+        <button id="btn-get-package" type="submit">Get Your Icon Pack</button>
+        </div>
+        </form>
+    </div>
+    <div class="load-sprites"></div>
+    <script>
+        svgc.init();  
+    </script>
+</body>
+</html>
