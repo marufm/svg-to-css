@@ -58,17 +58,32 @@
             <p class="state-1">Set Your Package Options <i title="Not just yet, where are the SVGs?">and Download</i></p>
             <p class="state-2">Set Your Package Options & Download</p>
 
-            div#package-options
+
             <fieldset>
                     <label class="description">I want my data encoded as:</label>
                     <input id="en_utf8" type="radio" name="encoding" value="utf8" checked /><label for="en_utf8">utf8 | </label>
                     <input id="en_base64" type="radio" name="encoding" value="base64" /><label for="en_base64">base64 | </label>
                     <input id="en_url" type="radio" name="encoding" value="url" /><label for="en_url">uri</label>
-                </fieldset>
+            </fieldset>
 
-        <button id="btn-get-package" type="submit">Get Your Icon Pack</button>
+        <button class="hide" id="btn-get-package" type="submit">Get Your Icon Pack</button>
+        <a class="button hide" id="btn-get-code">I Want DigiTyle c0d3</a>
         </div>
         </form>
+
+
+        <div class="digityle" id="digityle">
+            <div class="step-num g-block">
+                <h2>4</h2>
+            </div>
+            <div id="digityle-code" class="digityle-code g-block">
+                <p class="state-1">Gimme div structure</p>
+
+                <textarea class="code" id="digityle-html"></textarea>
+                <textarea class="code" id="digityle-css"></textarea>
+            </div>
+        </div>
+
     </div>
     <div class="load-sprites"></div>
     <script>

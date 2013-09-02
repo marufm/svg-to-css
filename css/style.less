@@ -76,6 +76,11 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 @grid-9: (@grid-u * 9) + 1;
 @grid-10: (@grid-u * 10) + 1;
 
+
+.hide{
+  display: none;
+}
+
 @gheight: 39px;
 .height(@unit){
    height:(@gheight * @unit) + (@unit - 1);
@@ -183,12 +188,8 @@ body{
 }
 
 .code{
-  float:left;
   font-family:Courier, monospace;
-  width: 800px;
-  overflow:hidden;
-  padding: 20px;
-  background-color: #B6D882;
+  overflow:scroll;
 }
 
 header{
@@ -408,7 +409,7 @@ header{
 }
 
 .package-options{
-  .height(3, 0, @grid-4);
+  .height(3, 0, @grid-1);
   .width(19, 0, @grid-1);
   background-color: @bgfaded;
   border-top: 1px solid @salsared;
@@ -452,8 +453,8 @@ header{
 
   }
 
-  & button, & button[type="submit"]{
-    display: none;
+  & button, & button[type="submit"], & .button{
+    display: inline-block;
     margin: 0;
     margin-left: @grid-u;
     margin-top: unit(15/20, em);
@@ -475,7 +476,19 @@ header{
       border: 1px solid @font-c-grey-dark;
     }
 
+    .hide;
+
   }
 
 }
 
+.digityle-code{
+  .height(5, 0, @grid-1);
+  .width(19, 0, @grid-1, 0, @grid-1, @grid-1);
+  background-color: @bgfaded;
+  border-top: 1px solid @salsared;
+}
+
+.digityle{
+  display: none;
+}

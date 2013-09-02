@@ -57,7 +57,10 @@ var svgc = {
             jQuery.event.props.push('dataTransfer');     
                         
             // listen to body grag & drop
-            $('body').bind('dragover', function(thisEvent) {   // using dragover instead of dragenter as it wasn't firing and causing erros
+
+            var bodyelement = $('body');
+
+            bodyelement.bind('dragover', function(thisEvent) {   // using dragover instead of dragenter as it wasn't firing and causing erros
                 thisEvent.stopPropagation();
                 thisEvent.preventDefault();
                             
@@ -67,13 +70,13 @@ var svgc = {
                             
                 return false;
             });
-                        
-            $('body').bind('dragleave', function() {
+
+            bodyelement.bind('dragleave', function() {
                 $(this).removeClass('over');
                 return false;
             });
-                        
-            $('body').bind('drop', function(thisEvent) {
+
+            bodyelement.bind('drop', function(thisEvent) {
                 thisEvent.stopPropagation();
                 thisEvent.preventDefault();
                 $(this).removeClass('over');
@@ -99,27 +102,33 @@ var svgc = {
                     reader.readAsText(f);
                 }
 
-
-                // Yes i know this is bad, just doing this for now,
-                // it'll take a bit of time to write something more robust
-                var div_drop_zone = $('#drop_zone');
-                var div_step_2 =  $('#step-2-info');
-                var div_package_opt = $('#package-options');
-                var btn_package = $('#btn-get-package');
-                div_drop_zone.children('.state-1').hide();
-                div_drop_zone.children('.state-2').show();
-                div_step_2.children('.state-1').hide();
-                div_step_2.children('.state-2').show();
-                div_package_opt.children('.state-1').hide();
-                div_package_opt.children('.state-2').show();
-                btn_package.show();
-                div_package_opt.css({
-                    // the block is 3 units tall
-                    // so to the current height add height of a single block x 3
-                    height:div_package_opt.outerHeight() + ((div_package_opt.outerHeight()/3) * 2)
-                });
+                // checking if anything (ie svgs) exist in the data div
 
 
+                if ( $('#data').children().length < 1 && files.length > 0){
+                    // Yes i know this is bad, just doing this for now,
+                    // it'll take a bit of time to write something more robust
+                    var div_drop_zone = $('#drop_zone');
+                    var div_step_2 =  $('#step-2-info');
+                    var div_package_opt = $('#package-options');
+                    var btns_package = $('#package-options button, #package-options .button');
+                    div_drop_zone.children('.state-1').hide();
+                    div_drop_zone.children('.state-2').show();
+                    div_step_2.children('.state-1').hide();
+                    div_step_2.children('.state-2').show();
+                    div_package_opt.children('.state-1').hide();
+                    div_package_opt.children('.state-2').show();
+                    btns_package.show();
+                    div_package_opt.css({
+                        // the block is 3 units tall
+                        // so to the current height add height of a single block x 3
+                        height:div_package_opt.outerHeight() + ((div_package_opt.outerHeight()/3) * 2)
+                    });
+                    $('#btn-get-code').unbind().bind('click', function(){
+                        $('#digityle').show();
+                        $('#data .remove-icon').hide();
+                    })
+                }
             });
             
         });
@@ -142,7 +151,7 @@ var svgc = {
         var button = $('<a title="Remove Icon" class="remove-icon" href="#!"></a>').click(function(){
             $(this).parent().parent().remove();
         })
-        var fname = $('<div class="filename"><p>' + id + '</p></div>')
+        var fname = $('<div class="filename"><p>' + id + '</p></div>');
         var input_svg = $('<input type="hidden" name="svg_data[]" value="' + data + '" />');
         var input_name = $('<input type="hidden" name="svg_name[]" value="' + id + '" />');
         icon.append(button)
@@ -152,6 +161,15 @@ var svgc = {
 
         iconWrapper.append(icon);
         $('#data').append(iconWrapper);
+
+        var svgcodestring = '<div class="svg-icon-tile"><div class="svg-icon-filename">' + id + '</div><div class="svg-icon ' + id + '"></div></div>';
+        var svgcodehtml = $('<div />').text(svgcodestring).html();
+        var svgcodecss = '.svg-icon.' + id + '{ \n background-image:url("data:image/svg+xml,' + data + '"); \n .lt-ie9 & { background-image:url(../images/' + id +'.png);} \n}';
+
+        console.log(svgcodecss);
+
+        $('#digityle-html').append(svgcodehtml + '\n');
+        $('#digityle-css').append(svgcodecss + '\n');
 
     },
     

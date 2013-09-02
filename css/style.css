@@ -180,6 +180,9 @@ table {
   border-spacing: 0;
 }
 /*###############################################################################*/
+.hide {
+  display: none;
+}
 .transparent-bg {
   background-color: rgba;
   opacity: 0.65;
@@ -250,12 +253,8 @@ body .load-sprites {
   background-size: 50px 50px;
 }
 .code {
-  float: left;
   font-family: Courier, monospace;
-  width: 800px;
-  overflow: hidden;
-  padding: 20px;
-  background-color: #B6D882;
+  overflow: scroll;
 }
 header {
   height: 79px;
@@ -501,7 +500,7 @@ header .more-info:hover {
 .package-options {
   height: 119px;
   margin-top: 0;
-  margin-bottom: 161px;
+  margin-bottom: 41px;
   padding-top: 0;
   padding-bottom: 0;
   width: 759px;
@@ -540,8 +539,9 @@ header .more-info:hover {
   font-size: 20px;
 }
 .package-options button,
-.package-options button[type="submit"] {
-  display: none;
+.package-options button[type="submit"],
+.package-options .button {
+  display: inline-block;
   margin: 0;
   margin-left: 40px;
   margin-top: 0.75em;
@@ -554,10 +554,29 @@ header .more-info:hover {
   box-sizing: border-box;
   padding: 0 1em;
   color: rgba(0, 0, 0, 0.65);
+  display: none;
 }
 .package-options button:hover,
-.package-options button[type="submit"]:hover {
+.package-options button[type="submit"]:hover,
+.package-options .button:hover {
   cursor: pointer;
   background-color: rgba(240, 240, 240, 0.75);
   border: 1px solid rgba(0, 0, 0, 0.65);
+}
+.digityle-code {
+  height: 199px;
+  margin-top: 0;
+  margin-bottom: 41px;
+  padding-top: 0;
+  padding-bottom: 0;
+  width: 718px;
+  margin-right: 0;
+  margin-left: 41px;
+  padding-right: 0;
+  padding-left: 41px;
+  background-color: rgba(248, 248, 248, 0.75);
+  border-top: 1px solid #ea1827;
+}
+.digityle {
+  display: none;
 }
