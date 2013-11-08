@@ -135,7 +135,8 @@ var svgc = {
     },
     
     addInfo: function( data, id ) {
-        data = encodeURIComponent( data );
+        data = encodeURIComponent(data);
+        data = data.replace(/\(/g,'%28').replace(/\)/g,'%29');
         var element = $('#' + id);
         if( element.length == 0 ) {
             svgc.createDomIcon(data, id);
@@ -164,7 +165,7 @@ var svgc = {
 
         var svgcodestring = '<div class="svg-icon-tile"><div class="svg-icon-filename">' + id + '</div><div class="svg-icon ' + id + '"></div></div>';
         var svgcodehtml = $('<div />').text(svgcodestring).html();
-        var svgcodecss = '.svg-icon.' + id + '{ \n background-image:url("data:image/svg+xml,' + data + '"); \n .lt-ie9 & { background-image:url(../images/' + id +'.png);} \n}';
+        var svgcodecss = '.svg-icon.' + id + '{ \n background-image:url("data:image/svg+xml,' + data + '"); \n .no-svg & { background-image:url(../images/' + id +'.png);} \n}';
 
         console.log(svgcodecss);
 
