@@ -35,7 +35,7 @@ $('document').ready(function(){
 var svgconverter = {
     
     init: function() {
-        $(document).ready(function() {
+        
 
             // Check for the various File API support.
             if (window.File && window.FileReader && window.FileList && window.Blob) {
@@ -93,7 +93,7 @@ var svgconverter = {
                 }
             });
             
-        });
+        
     },
     
     addInfo: function( data, id ) {
@@ -125,14 +125,14 @@ var svgconverter = {
         iconWrapper.append(icon);
         $('#data').append(iconWrapper);
 
-        var svgconverterodestring = '<div class="svg-icon-tile"><div class="svg-icon-filename">' + id + '</div><div class="svg-icon ' + id + '"></div></div>';
-        var svgconverterodehtml = $('<div />').text(svgconverterodestring).html();
-        var svgconverterodecss = '.svg-icon.' + id + '{ \n background-image:url("data:image/svg+xml,' + data + '"); \n .no-svg & { background-image:url(../images/' + id +'.png);} \n}';
+        var svgc_string = '<div class="svg-icon-tile"><div class="svg-icon-filename">' + id + '</div><div class="svg-icon ' + id + '"></div></div>';
+        var svgc_html = $('<div />').text(svgc_string).html();
+        var svgc_css = '.svg-icon.' + id + '{ \n background-image:url("data:image/svg+xml,' + data + '"); \n .no-svg & { background-image:url(../images/' + id +'.png);} \n}';
 
-        console.log(svgconverterodecss);
+        console.log(svgc_css);
 
-        // $('#digityle-html').append(svgconverterodehtml + '\n');
-        // $('#digityle-css').append(svgconverterodecss + '\n');
+        // $('#digityle-html').append(svgc_html + '\n');
+        // $('#digityle-css').append(svgc_css + '\n');
 
     },
     
@@ -144,4 +144,15 @@ var svgconverter = {
     create_css_str: function( data ) {
         return {'background-image' : 'url("data:image/svg+xml,' + data + '")'};
     },
+
+    spitOutCss: function (){
+        $('#get_css_btn').on('click', function(){
+
+        });
+        
+    },
+
+    getCssOptions: function(){
+
+    }
 };
