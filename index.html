@@ -10,7 +10,37 @@
     <div id="data">
         
     </div>
+
+	<div id="format-shell">
+	    <form action="" id="options-form">
+	    	<div>
+	    		<input type="radio" name="encoding" value="utf8" id="encoding_utf"><label for="encoding_utf">utf-8</label>
+	    	</div>
+	    	<div>
+	    		<input type="radio" name="encoding" value="uri" id="encoding_uri" checked><label for="encoding_uri">uri encoded</label>
+	    	</div>
+	    	<div>
+	    		<input type="radio" name="encoding" value="b64" id="encoding_b64"><label for="encoding_b64">base 64</label>
+	    	</div>
+
+	    	<div>
+	    		<input type="radio" name="format" value="css" id="format_utf"><label for="format_utf">utf-8</label>
+	    	</div>
+	    	<div>
+	    		<input type="radio" name="format" value="scss" id="format_uri" checked><label for="format_uri">uri encoded</label>
+	    	</div>
+	    	<div class="submit">
+            	<input type="submit" value="Gimme Ma Code">
+        	</div>
+	    </form>
+	</div>
+
+	<div id="outputs-shell">
+		<textarea id="output" cols="30" rows="10"></textarea>
+	</div>   
     <script src="js/jquery-1.9.1.min.js" type="text/javascript"></script>
     <script src="js/svg-converter.js" type="text/javascript"></script>
+
+
 </body>
 </html>
