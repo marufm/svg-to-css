@@ -1,31 +1,4 @@
 
-/**
- * Useful function to serialize form data for ajax requests
- */
-/*$(function() {
-    
-    $.fn.serializeObject = function() {
-        var o = {};
-        var a = this.serializeArray();
-        $.each(a, function() {
-            if (o[this.name] !== undefined) {
-                if (!o[this.name].push) {
-                    o[this.name] = [o[this.name]];
-                }
-                o[this.name].push(this.value || '');
-            } else {
-                o[this.name] = this.value || '';
-            }
-        });
-        return o;
-    };
-    
-});
-*/
-/* 
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
 $('document').ready(function(){
 
@@ -137,8 +110,7 @@ var svgconverter = {
 
 
         // var dom_element = $('<div />', {id: svg_name,});
-        post_svg_data = encodeURIComponent(svg_data);
-        post_svg_data = post_svg_data.replace(/\(/g,'%28').replace(/\)/g,'%29');
+        
         
 
         // check to see if this svg already exists by doing a dom search
@@ -147,7 +119,7 @@ var svgconverter = {
         if( element_check.length == 0 ) {
             
             var icon = $('<div />', {class: "svg-icon-shell",});
-            icon.css(svgconverter.create_css_str(post_svg_data));
+            //icon.css(svgconverter.create_css_str(post_svg_data));
             var button = $('<a title="Remove Icon" class="remove-icon" href="#!"></a>').click(function(){
                 $(this).parent().parent().remove();
             })
@@ -202,31 +174,41 @@ var svgconverter = {
         });
 
         var encoding_to_use, format_to_use;
-        switch (encoding){
-                    case "utf8":
-                        cencoding_to_use = "utf8"
-                        break;
-                    case "uri":
-                        cencoding_to_use = "uri"
-                        break;
-                    case "b64":
-                        cencoding_to_use = "b64"
-                        break;
-                }
-
-        switch (format){
-                    case "css":
-                        console.log('in css ');
-                        break;
-                    case "scss":
-                        console.log('in scss');
-                        break;
-        }
 
         var output_text_area = $('#output');
 
         var svgs = $('#data > .svg-icon').each(function(index){
-            output_text_area.val( output_text_area.val() + '\n' +$(this).data('raw_svg_data'));
+            var raw_svg_data = $(this).data('raw_svg_data'),
+                svg_name = $(this).data('file_name'),
+                processed_svg_data,
+                final_string;
+
+                
+
+            switch (encoding){
+                case "utf8":
+                    processed_svg_data = raw_svg_data;
+                    break;
+                case "uri":
+                    processed_svg_data = encodeURIComponent(raw_svg_data);
+                    processed_svg_data = processed_svg_data .replace(/\(/g,'%28').replace(/\)/g,'%29');
+                    break;
+                case "b64":
+                    processed_svg_data = window.atob(raw_svg_data);
+                    processed_svg_data = ';base64, ' + processed_svg_data;
+                    break;
+            }
+
+            switch (format){
+                case "css":
+                    final_string = '.' + svg_name + '{background-image:url("data:image/svg+xml,' + processed_svg_data + '");}';
+                    break;
+                case "scss":
+                    final_string = '@' + svg_name + '{background-image:url("data:image/svg+xml,' + processed_svg_data + '");}';
+                    break;
+            }
+
+            output_text_area.val( output_text_area.val() + '\n\n' + final_string);
 
         });
 
