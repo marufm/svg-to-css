@@ -94,7 +94,7 @@ var svgconverter = {
                         return function(e) {
                             var id = theFile.name.substr(0, theFile.name.lastIndexOf('.'));
                             svgconverter.make_svg_element(e.target.result, id);
-                            console.log('here');
+                            //console.log('here');
                         };
                     })(f);
                     // Read in the image file as a data URL.
@@ -110,39 +110,18 @@ var svgconverter = {
                   //console.log( $( this ).serializeArray() );
 
                 var optionfields =  $( this ).serializeArray();
-
-                var encoding_to_use = "",
-                    format_to_use = "";
                 
+                var format, encoding;
                 jQuery.each( optionfields, function( i, field ) {
                     if(field.name === 'encoding'){
-                        encoding_to_use = field.value;
+                        encoding = field.value;
                     }
                     if(field.name === 'format'){
-                        format_to_use = field.value;
+                        format = field.value;
                     }
                 });
 
-                switch (encoding_to_use){
-                    case "utf8":
-                        console.log('Making utf8 encoded code');
-                        break;
-                    case "uri":
-                        console.log('Making uri encoded code');
-                        break;
-                    case "b64":
-                        console.log('Making base64 encoded code');
-                        break;
-                }
-
-                switch (format_to_use){
-                    case "css":
-                        console.log('Making utf8 encoded code');
-                        break;
-                    case "scss":
-                        console.log('Making uri encoded code');
-                        break;
-                }
+                svgconverter.spitOutCss(encoding, format);
 
             });
         
@@ -151,7 +130,7 @@ var svgconverter = {
     make_svg_element: function( svg_data, svg_name ) {
         
         // Create Dom Element Variable
-        var dom_element = $('<div />', {id: svg_name,});
+        var dom_element = $('<div />', {id: 'svg_name',class: 'svg-icon'});
         dom_element.data("raw_svg_data", svg_data);   // add svg data to dom element
         dom_element.data("file_name", svg_name);    // add svg name to dom element
 
@@ -164,10 +143,10 @@ var svgconverter = {
 
         // check to see if this svg already exists by doing a dom search
         // length should be greather than 0;
-        var element = $('#' + svg_name);
-        if( element.length == 0 ) {
+        var element_check = $('#' + svg_name);
+        if( element_check.length == 0 ) {
             
-            var icon = $('<div />', {class: "svg-icon",});
+            var icon = $('<div />', {class: "svg-icon-shell",});
             icon.css(svgconverter.create_css_str(post_svg_data));
             var button = $('<a title="Remove Icon" class="remove-icon" href="#!"></a>').click(function(){
                 $(this).parent().parent().remove();
@@ -216,7 +195,41 @@ var svgconverter = {
         return {'background-image' : 'url("data:image/svg+xml,' + data + '")'};
     },
 
-    spitOutCss: function (){
+    spitOutCss: function (encoding, format){
+
+        var svgs = $('#data > .svg-icon').each(function(index){
+            
+        });
+
+        var encoding_to_use, format_to_use;
+        switch (encoding){
+                    case "utf8":
+                        cencoding_to_use = "utf8"
+                        break;
+                    case "uri":
+                        cencoding_to_use = "uri"
+                        break;
+                    case "b64":
+                        cencoding_to_use = "b64"
+                        break;
+                }
+
+        switch (format){
+                    case "css":
+                        console.log('in css ');
+                        break;
+                    case "scss":
+                        console.log('in scss');
+                        break;
+        }
+
+        var output_text_area = $('#output');
+
+        var svgs = $('#data > .svg-icon').each(function(index){
+            output_text_area.val( output_text_area.val() + '\n' +$(this).data('raw_svg_data'));
+
+        });
+
 
     },
 
