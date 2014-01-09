@@ -1,23 +1,52 @@
 
-
-$('document').ready(function(){
-
-     svgconverter.init(); 
+/**
+ * Useful function to serialize form data for ajax requests
+ */
+$(function() {
+    
+    $.fn.serializeObject = function() {
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function() {
+            if (o[this.name] !== undefined) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    };
+    
 });
 
-var svgconverter = {
+/* 
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 
-    svgs: {
-        svg_ids: [],
-        svg_data: [],
-        add_svg: function(){
+function domReadyFuncs(){
+    $('#btn-tool-info').click(function(){
+        $('#tool-info').show();
+        $(this).hide();
 
-        }
-    },
+        $('#btn-info-close').unbind().click(function(){
+            $('#tool-info').hide();
+            $('#btn-tool-info').show();
+         });
+
+    });
+}
+
+var svgc = {
     
     init: function() {
-        
+        $(document).ready(function() {
 
+            domReadyFuncs();
+            
             // Check for the various File API support.
             if (window.File && window.FileReader && window.FileList && window.Blob) {
                 // Great success! All the File APIs are supported.
@@ -66,160 +95,103 @@ var svgconverter = {
                     reader.onload = (function(theFile) {
                         return function(e) {
                             var id = theFile.name.substr(0, theFile.name.lastIndexOf('.'));
-                            svgconverter.make_svg_element(e.target.result, id);
-                            //console.log('here');
+                            svgc.addInfo(e.target.result, id);
                         };
                     })(f);
                     // Read in the image file as a data URL.
                     reader.readAsText(f);
                 }
 
+                // checking if anything (ie svgs) exist in the data div
 
 
+                if ( $('#data').children().length < 1 && files.length > 0){
+                    // Yes i know this is bad, just doing this for now,
+                    // it'll take a bit of time to write something more robust
+                    var div_drop_zone = $('#drop_zone');
+                    var div_step_2 =  $('#step-2-info');
+                    var div_package_opt = $('#package-options');
+                    var btns_package = $('#package-options button, #package-options .button');
+                    div_drop_zone.children('.state-1').hide();
+                    div_drop_zone.children('.state-2').show();
+                    div_step_2.children('.state-1').hide();
+                    div_step_2.children('.state-2').show();
+                    div_package_opt.children('.state-1').hide();
+                    div_package_opt.children('.state-2').show();
+                    btns_package.show();
+                    div_package_opt.css({
+                        // the block is 3 units tall
+                        // so to the current height add height of a single block x 3
+                        height:div_package_opt.outerHeight() + ((div_package_opt.outerHeight()/3) * 2)
+                    });
+                    $('#btn-get-code').unbind().bind('click', function(){
+                        $('#digityle').show();
+                        $('#data .remove-icon').hide();
+                    })
+                }
             });
             
-            $( "#options-form" ).on( "submit", function( event ) {
-                event.preventDefault();
-                  //console.log( $( this ).serializeArray() );
-
-                var optionfields =  $( this ).serializeArray();
-                
-                var format, encoding;
-                jQuery.each( optionfields, function( i, field ) {
-                    if(field.name === 'encoding'){
-                        encoding = field.value;
-                    }
-                    if(field.name === 'format'){
-                        format = field.value;
-                    }
-                });
-
-                svgconverter.spitOutCss(encoding, format);
-
-            });
-        
+        });
     },
     
-    make_svg_element: function( svg_data, svg_name ) {
-        
-        // Create Dom Element Variable
-        var dom_element = $('<div />', {id: 'svg_name',class: 'svg-icon'});
-        dom_element.data("raw_svg_data", svg_data);   // add svg data to dom element
-        dom_element.data("file_name", svg_name);    // add svg name to dom element
-
-
-
-        // var dom_element = $('<div />', {id: svg_name,});
-        
-        
-
-        // check to see if this svg already exists by doing a dom search
-        // length should be greather than 0;
-        var element_check = $('#' + svg_name);
-        if( element_check.length == 0 ) {
-            
-            var icon = $('<div />', {class: "svg-icon-shell",});
-            //icon.css(svgconverter.create_css_str(post_svg_data));
-            var button = $('<a title="Remove Icon" class="remove-icon" href="#!"></a>').click(function(){
-                $(this).parent().parent().remove();
-            })
-            var fname = $('<div class="filename"><p>' + svg_name + '</p></div>');
-            icon.appendTo(dom_element);
-            fname.appendTo(dom_element);
-            button.appendTo(dom_element);
-            dom_element.appendTo('#data');
-            //svgconverter.createIconDom(data, id);
+    addInfo: function( data, id ) {
+        data = encodeURIComponent(data);
+        data = data.replace(/\(/g,'%28').replace(/\)/g,'%29');
+        var element = $('#' + id);
+        if( element.length == 0 ) {
+            svgc.createDomIcon(data, id);
         } else {
-            $( '#' + svg_name + '.svg-icon').css( svgconverter.create_css_str( post_svg_data ) );
+            svgc.updateDomIcon(data, id);
         }
     },
-
-    createIconDom: function( data, id ) {
-        var iconWrapper = $('<div id="' + id + '" class="icon-info"/>');
-        
-       
-       
-        //var input_svg = $('<input type="hidden" name="svg_data[]" value="' + data + '" />');
-        // var input_name = $('<input type="hidden" name="svg_name[]" value="' + id + '" />');
-        icon.append(button);
+    
+    createDomIcon: function( data, id ) {
+        var iconWrapper = $('<div id="' + id + '" class="icon-info g-block"/>');
+        var icon = $('<div class="svg-icon"/>');
+        icon.css(svgc.cssbg(data));
+        var button = $('<a title="Remove Icon" class="remove-icon" href="#!"></a>').click(function(){
+            $(this).parent().parent().remove();
+        })
+        var fname = $('<div class="filename"><p>' + id + '</p></div>');
+        var input_svg = $('<input type="hidden" name="svg_data[]" value="' + data + '" />');
+        var input_name = $('<input type="hidden" name="svg_name[]" value="' + id + '" />');
+        icon.append(button)
         icon.append(fname);
+        icon.append(input_svg)
+        icon.append(input_name)
 
         iconWrapper.append(icon);
         $('#data').append(iconWrapper);
 
-        // var svgc_string = '<div class="svg-icon-tile"><div class="svg-icon-filename">' + id + '</div><div class="svg-icon ' + id + '"></div></div>';
-        // var svgc_html = $('<div />').text(svgc_string).html();
-        // var svgc_css = '.svg-icon.' + id + '{ \n background-image:url("data:image/svg+xml,' + data + '"); \n .no-svg & { background-image:url(../images/' + id +'.png);} \n}';
+        var svgcodestring = '<div class="svg-icon-tile"><div class="svg-icon-filename">' + id + '</div><div class="svg-icon ' + id + '"></div></div>';
+        var svgcodehtml = $('<div />').text(svgcodestring).html();
+        var svgcodecss = '.svg-icon.' + id + '{ \n background-image:url("data:image/svg+xml,' + data + '"); \n .no-svg & { background-image:url(../images/' + id +'.png);} \n}';
 
-        
+        console.log(svgcodecss);
 
-        // $('#digityle-html').append(svgc_html + '\n');
-        // $('#digityle-css').append(svgc_css + '\n');
+        $('#digityle-html').append(svgcodehtml + '\n');
+        $('#digityle-css').append(svgcodecss + '\n');
 
     },
     
     updateDomIcon: function( data, id ) {
-        $( '#' + id + ' .svg-icon' ).css( this.create_css_str( data ) );
+        $( '#' + id + ' .svg-icon' ).css( this.cssbg( data ) );
         $( '#' + id + ' input' ).attr( 'value', data );
     },
     
-    create_css_str: function( data ) {
+    cssbg: function( data ) {
         return {'background-image' : 'url("data:image/svg+xml,' + data + '")'};
     },
-
-    create_escaped_data: function (data, encoding_to_use){
-
+    
+    getFromData: function() {
+        return $('form#svg-data').serializeObject();
     },
-
-    spitOutCss: function (encoding, format){
-
-        var svgs = $('#data > .svg-icon').each(function(index){
-            
+    
+    download: function() {
+        // this needs to insert a hidden iframe with the post data to auto trigger download
+        $.post( 'promotion/remove_skus', svgc.getFromData(), function( data ) {
+        
         });
-
-        var encoding_to_use, format_to_use;
-
-        var output_text_area = $('#output');
-
-        var svgs = $('#data > .svg-icon').each(function(index){
-            var raw_svg_data = $(this).data('raw_svg_data'),
-                svg_name = $(this).data('file_name'),
-                processed_svg_data,
-                final_string;
-
-                
-
-            switch (encoding){
-                case "utf8":
-                    processed_svg_data = raw_svg_data;
-                    break;
-                case "uri":
-                    processed_svg_data = encodeURIComponent(raw_svg_data);
-                    processed_svg_data = processed_svg_data .replace(/\(/g,'%28').replace(/\)/g,'%29');
-                    break;
-                case "b64":
-                    processed_svg_data = window.atob(raw_svg_data);
-                    processed_svg_data = ';base64, ' + processed_svg_data;
-                    break;
-            }
-
-            switch (format){
-                case "css":
-                    final_string = '.' + svg_name + '{background-image:url("data:image/svg+xml,' + processed_svg_data + '");}';
-                    break;
-                case "scss":
-                    final_string = '@' + svg_name + '{background-image:url("data:image/svg+xml,' + processed_svg_data + '");}';
-                    break;
-            }
-
-            output_text_area.val( output_text_area.val() + '\n\n' + final_string);
-
-        });
-
-
-    },
-
-    getCssOptions: function(){
-
     }
+    
 };
