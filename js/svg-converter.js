@@ -167,6 +167,10 @@ var svgconverter = {
         return {'background-image' : 'url("data:image/svg+xml,' + data + '")'};
     },
 
+    create_escaped_data: function (data, encoding_to_use){
+
+    },
+
     spitOutCss: function (encoding, format){
 
         var svgs = $('#data > .svg-icon').each(function(index){
