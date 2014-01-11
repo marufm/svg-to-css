@@ -67,7 +67,6 @@ var svgconverter = {
                         return function(e) {
                             var id = theFile.name.substr(0, theFile.name.lastIndexOf('.'));
                             svgconverter.make_svg_element(e.target.result, id);
-                            //console.log('here');
                         };
                     })(f);
                     // Read in the image file as a data URL.
@@ -106,10 +105,6 @@ var svgconverter = {
         var dom_element = $('<div />', {id: svg_name,class: 'svg-icon-shell'});
         dom_element.data("raw_svg_data", svg_data);   // add svg data to dom element
         dom_element.data("file_name", svg_name);    // add svg name to dom element
-
-
-
-        // var dom_element = $('<div />', {id: svg_name,});
         
         
 
@@ -130,39 +125,9 @@ var svgconverter = {
             fname.appendTo(dom_element);
             button.appendTo(dom_element);
             dom_element.appendTo('#data');
-            //svgconverter.createIconDom(data, id);
         } else {
             $( '#' + svg_name + '.svg-icon-shell').css( svgconverter.create_css_str( svg_data, "uri", "object") );
         }
-    },
-
-    createIconDom: function( data, id ) {
-        var iconWrapper = $('<div id="' + id + '" class="icon-info"/>');
-        
-       
-       
-        //var input_svg = $('<input type="hidden" name="svg_data[]" value="' + data + '" />');
-        // var input_name = $('<input type="hidden" name="svg_name[]" value="' + id + '" />');
-        icon.append(button);
-        icon.append(fname);
-
-        iconWrapper.append(icon);
-        $('#data').append(iconWrapper);
-
-        // var svgc_string = '<div class="svg-icon-tile"><div class="svg-icon-filename">' + id + '</div><div class="svg-icon ' + id + '"></div></div>';
-        // var svgc_html = $('<div />').text(svgc_string).html();
-        // var svgc_css = '.svg-icon.' + id + '{ \n background-image:url("data:image/svg+xml,' + data + '"); \n .no-svg & { background-image:url(../images/' + id +'.png);} \n}';
-
-        
-
-        // $('#digityle-html').append(svgc_html + '\n');
-        // $('#digityle-css').append(svgc_css + '\n');
-
-    },
-    
-    updateDomIcon: function( data, id ) {
-        $( '#' + id + ' .svg-icon' ).css( this.create_css_str( data, "uri" ) );
-        $( '#' + id + ' input' ).attr( 'value', data );
     },
     
     create_css_str: function( data , encoding, type) {
@@ -172,12 +137,10 @@ var svgconverter = {
         if(encoding == "uri"){
             
             css_str = 'url("data:image/svg+xml,' + svgconverter.create_escaped_data(data, "uri") + '")';
-            console.log(svgconverter.create_escaped_data(data, "uri"));
+            
         }else if(encoding == "b64"){
             css_str = 'url("data:image/svg+xml;base64,' + svgconverter.create_escaped_data(data, "uri") + '")';
         }
-
-        //return {'background-image' : 'url("data:image/svg+xml,' + data + '")'};
         
         if(type == "object"){
             return {'background-image' : css_str};
