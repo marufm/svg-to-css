@@ -1,6 +1,53 @@
 @import "reset.scss";
 @import "mixins_n_vars.scss";
+@import "type.scss";
 
 body{
 	height: 1024px;
+	font-family: $font-stack-std;
+	font-size: 16px;
+	line-height: 1.24em;
+	background-color: $colour-primary;
+}
+
+h1{
+	font-family: $font-stack-bold;
+	font-size: 36px;
+	line-height: 1em;
+}
+
+header{
+	width: 100%;
+	background-color: $colour-secondary;
+
+	@include clearfix;
+
+	.btn{
+		color: $colour-primary;
+		font-size: 14px;
+		font-family: $font-stack-light;
+		line-height: 1em;
+		margin: 0.5em 0.5em 0;
+		float: right;
+	}
+}
+
+.intro{
+	width: 100%;
+	max-width: 960px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+#format-shell{
+	display: none;
+}
+
+#outputs-shell{
+	display: none;
+}
+
+.shown{
+	display: block !important;
+	visibility: visible !important;
 }

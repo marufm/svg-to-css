@@ -1,1 +1,19 @@
-$font-stack-std: 'Arial', Helvetica, 'Helvetica Neue', sans-serif;
+$font-stack-std: 'signikaregular', Verdana, sans-serif;
+$font-stack-light: 'signikalight', Verdana, sans-serif;
+$font-stack-semibold: 'signikasemibold', Verdana, sans-serif;
+$font-stack-bold: 'signikabold', Verdana, sans-serif;
+
+$colour-primary: #fff;
+$colour-secondary: #000;
+
+@mixin clearfix{
+  &:before,
+  &:after{
+      display: table;
+      content: " ";
+  }
+
+  &:after{
+      clear: both;
+  }
+}

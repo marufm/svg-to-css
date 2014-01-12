@@ -51,6 +51,9 @@ var svgconverter = {
                 thisEvent.stopPropagation();
                 thisEvent.preventDefault();
                 $(this).removeClass('over');
+
+                var optionsDiv = $('#format-shell');
+                var outputDiv = $('#outputs-shell');
                 // removes old svgs
                 //$('#data').html(' ');
                 var files = thisEvent.dataTransfer.files; // FileList object
@@ -71,11 +74,17 @@ var svgconverter = {
                     })(f);
                     // Read in the image file as a data URL.
                     reader.readAsText(f);
+
+                    if(i == 0){
+                        outputDiv.addClass('shown');
+                        optionsDiv.addClass('shown');
+                    }
                 }
 
 
 
             });
+
             
             $( "#options-form" ).on( "submit", function( event ) {
                 event.preventDefault();
