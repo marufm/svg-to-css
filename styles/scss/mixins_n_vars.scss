@@ -3,8 +3,11 @@ $font-stack-light: 'signikalight', Verdana, sans-serif;
 $font-stack-semibold: 'signikasemibold', Verdana, sans-serif;
 $font-stack-bold: 'signikabold', Verdana, sans-serif;
 
-$colour-primary: #fff;
-$colour-secondary: #000;
+$colour-primary: #FAFAFA;
+$colour-secondary: #1C1C1C;
+
+$colour-primary-halftint: darken($colour-primary, 10%);
+$colour-secondary-halftint: lighten($colour-secondary, 20%);
 
 @mixin clearfix{
   &:before,
@@ -16,4 +19,11 @@ $colour-secondary: #000;
   &:after{
       clear: both;
   }
+}
+
+@mixin transition-default($property){
+	-webkit-transition: $property 300ms;
+    -moz-transition: $property 300ms;
+    -o-transition: $property 300ms;
+    transition: $property 300ms;
 }

@@ -78,6 +78,7 @@ var svgconverter = {
                     if(i == 0){
                         outputDiv.addClass('shown');
                         optionsDiv.addClass('shown');
+                        $('body').addClass('iconed');
                     }
                 }
 
@@ -105,6 +106,11 @@ var svgconverter = {
                 svgconverter.spitOutCss(encoding, format);
 
             });
+
+            $( "#btn_toggle_bgc" ).on("click", function(event){ 
+                event.preventDefault();
+                $('body').toggleClass('inverted-colour');
+            });
         
     },
     
@@ -124,18 +130,21 @@ var svgconverter = {
             
             var icon = $('<div />', {class: "svg-icon",});
             //icon.css(svgconverter.create_css_str(post_svg_data));
-            var button = $('<a title="Remove Icon" class="remove-icon" href="#!"></a>').click(function(){
+            var button = $('<a title="Remove Icon" class="remove-icon" href="#!">Remove</a>').click(function(){
                 $(this).parent().parent().remove();
             })
             var fname = $('<div class="filename"><p>' + svg_name + '</p></div>');
             var make_str = svgconverter.create_css_str(svg_data,"<uri></uri>");
-            icon.css(svgconverter.create_css_str(svg_data, "uri", "object"));
+            //icon.css(svgconverter.create_css_str(svg_data, "uri", "object"));
+            icon.append(svg_data);
             icon.appendTo(dom_element);
+            button.appendTo(fname);
             fname.appendTo(dom_element);
-            button.appendTo(dom_element);
+            
             dom_element.appendTo('#data');
         } else {
-            $( '#' + svg_name + '.svg-icon-shell').css( svgconverter.create_css_str( svg_data, "uri", "object") );
+            //$( '#' + svg_name + '.svg-icon-shell').css( svgconverter.create_css_str( svg_data, "uri", "object") );
+            $( '#' + svg_name + '.svg-icon').html( svg_data );
         }
     },
     

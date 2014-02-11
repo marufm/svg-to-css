@@ -90,18 +90,121 @@ body {
   font-family: "signikaregular", Verdana, sans-serif;
   font-size: 16px;
   line-height: 1.24em;
-  background-color: white;
+  background-color: #fafafa;
+  -webkit-transition: background-color 300ms;
+  -moz-transition: background-color 300ms;
+  -o-transition: background-color 300ms;
+  transition: background-color 300ms;
+}
+body.inverted-colour {
+  background-color: #1c1c1c;
+  color: #fafafa;
+}
+body.inverted-colour.over {
+  background-color: #4f4f4f;
+}
+body.over {
+  background-color: #c7c7c7;
 }
 
-h1 {
+.intro {
+  width: 100%;
+  margin: 42px auto;
+  text-align: left;
+  border-bottom: 1px solid #e1e1e1;
+}
+.intro:before, .intro:after {
+  display: table;
+  content: " ";
+}
+.intro:after {
+  clear: both;
+}
+.intro .message {
+  max-width: 960px;
+  margin: 0 auto;
+}
+.intro .message:before, .intro .message:after {
+  display: table;
+  content: " ";
+}
+.intro .message:after {
+  clear: both;
+}
+.intro .message h1 {
+  display: block;
+  float: left;
+  width: 39.0625%;
   font-family: "signikabold", Verdana, sans-serif;
   font-size: 36px;
   line-height: 1em;
+  margin-top: 105px;
+  margin-left: 0;
+  margin-bottom: 20px;
+  margin-left: 0;
+  -webkit-transition: margin-top 300ms;
+  -moz-transition: margin-top 300ms;
+  -o-transition: margin-top 300ms;
+  transition: margin-top 300ms;
+}
+.iconed .intro .message h1 {
+  margin-top: 50px;
+}
+.intro .message h2 {
+  display: block;
+  float: left;
+  width: 60.9375%;
+  margin-top: 7em;
+}
+
+.instruct {
+  width: 100%;
+  -webkit-transition: margin-top 300ms;
+  -moz-transition: margin-top 300ms;
+  -o-transition: margin-top 300ms;
+  transition: margin-top 300ms;
+  -webkit-transition: opacity 300ms;
+  -moz-transition: opacity 300ms;
+  -o-transition: opacity 300ms;
+  transition: opacity 300ms;
+  -webkit-transition: height 300ms;
+  -moz-transition: height 300ms;
+  -o-transition: height 300ms;
+  transition: height 300ms;
+}
+.instruct:before, .instruct:after {
+  display: table;
+  content: " ";
+}
+.instruct:after {
+  clear: both;
+}
+.iconed .instruct {
+  margin-top: 0;
+  opacity: 0;
+  height: 0;
+}
+.instruct p.message {
+  display: block;
+  width: 100%;
+  max-width: 960px;
+  margin: 100px auto 100px auto;
+  opacity: 1;
+  text-align: center;
+}
+.iconed .instruct p.message {
+  margin-top: 0;
+  opacity: 0;
+  height: 0;
 }
 
 header {
   width: 100%;
-  background-color: black;
+  background-color: #1c1c1c;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 42px;
 }
 header:before, header:after {
   display: table;
@@ -111,19 +214,85 @@ header:after {
   clear: both;
 }
 header .btn {
-  color: white;
+  color: #fafafa;
   font-size: 14px;
   font-family: "signikalight", Verdana, sans-serif;
   line-height: 1em;
-  margin: 0.5em 0.5em 0;
+  margin: 0.5em 0 0.5em 0;
   float: right;
 }
+.inverted-colour header .btn {
+  color: #1c1c1c;
+}
+.inverted-colour header {
+  background-color: #fafafa;
+}
 
-.intro {
+#data {
+  width: 100%;
+  margin: 0 auto;
+}
+#data .svg-icon-shell {
+  width: 100%;
+  margin: 0 auto;
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid #e1e1e1;
+  padding: 20px 0 20px 0;
+}
+#data .svg-icon-shell:hover {
+  cursor: pointer;
+  border-top: 1px solid #cfcfcf;
+  border-bottom: 1px solid #cfcfcf;
+  box-shadow: 0 0 5px #cfcfcf;
+}
+#data .svg-icon-shell:hover .filename .remove-icon {
+  display: block;
+}
+.inverted-colour #data .svg-icon-shell {
+  border-bottom: 1px solid #4f4f4f;
+}
+.inverted-colour #data .svg-icon-shell:hover {
+  border-top: 1px solid #474747;
+  border-bottom: 1px solid #474747;
+  box-shadow: 0 0 5px #7a7a7a;
+}
+#data .svg-icon-shell .svg-icon {
+  background-repeat: no-repeat;
+  background-position: left top;
+  display: block;
   width: 100%;
   max-width: 960px;
   margin: 0 auto;
-  text-align: center;
+}
+#data .svg-icon-shell .filename {
+  display: block;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  position: relative;
+}
+#data .svg-icon-shell .filename:before, #data .svg-icon-shell .filename:after {
+  display: table;
+  content: " ";
+}
+#data .svg-icon-shell .filename:after {
+  clear: both;
+}
+#data .svg-icon-shell .filename p {
+  display: block;
+  float: left;
+}
+#data .svg-icon-shell .filename .remove-icon {
+  display: none;
+  position: absolute;
+  right: 0;
+  text-decoration: none;
+  padding: 0.5em 1em 0.5em 0.5em;
+  border: 1px solid #1c1c1c;
+  border-radius: 3px;
+}
+#data .svg-icon-shell .filename .remove-icon:hover {
+  background-color: #1c1c1c;
 }
 
 #format-shell {
