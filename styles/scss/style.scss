@@ -28,7 +28,7 @@ body{
 
 .intro{
 	width: 100%;
-	margin: 42px auto;
+	margin: 42px auto 0 auto;
 	text-align: left;
 	border-bottom: 1px solid $colour-primary-halftint;
 
@@ -42,31 +42,44 @@ body{
 
 		h1{
 			display: block;
+			@include box-sizing-borderbox;
 			float: left;
 			width: 39.0625%;
+
+			padding: 100px 5.208333333% 100px 5.208333333%;
 
 			font-family: $font-stack-bold;
 			font-size: 36px;
 			line-height: 1em;
 
-			margin-top:105px;
-			margin-left:0;
-			margin-bottom:20px;
-			margin-left:0;
+
+			border-left: 1px solid $colour-primary-halftint;
+			border-right: 1px solid $colour-primary-halftint;
 
 
 			@include transition-default(margin-top);
 
 			.iconed &{
-				margin-top: 50px;
+				padding-top: 30px;
+				padding-bottom: 30px;
 			}
 		}
 
 		h2{
 			display: block;
+			@include box-sizing-borderbox;
 			float: left;
 			width: 60.9375%;
-			margin-top:7em;
+			padding: 100px 5.208333333% 88px 5.208333333%;
+			border-right: 1px solid $colour-primary-halftint;
+
+			font-size: 20px;
+			line-height: 1.2em;
+
+			.iconed &{
+				padding-top: 30px;
+				padding-bottom: 18px;
+			}
 		}
 	}
 }
@@ -143,7 +156,7 @@ header{
 		margin: 0 auto;
 		border-top: 1px solid transparent;
 		border-bottom: 1px solid $colour-primary-halftint;
-		padding: 20px 0 20px 0;
+		padding: 20px 0 55px 0;
 
 		&:hover{
 			cursor: pointer;
@@ -169,6 +182,8 @@ header{
 		.svg-icon{
 			background-repeat: no-repeat;
 			background-position: left top;
+			@include box-sizing-borderbox;
+			padding: 0 4% 0 4%;
 			display: block;
 			width: 100%;
 			max-width: 960px;
@@ -177,6 +192,7 @@ header{
 
 		.filename{
 			display: block;
+			@include clearfix;
 			width: 100%;
 			max-width: 960px;
 			margin: 0 auto;
@@ -186,7 +202,20 @@ header{
 
 			p{
 				display: block;
-				float:left;
+				position: absolute;
+				bottom: 0;
+				margin-left: 5.208333333%;
+				top: 6px;
+				height: 1em;
+				background-color: lighten($colour-secondary, 80%);
+				color: lighten($colour-secondary, 50%);
+				padding: 0.25em 0.5em;
+				border-radius: 3px;
+
+				.inverted-colour &{
+					background-color: darken($colour-primary, 80%);
+					color: darken($colour-primary, 50%);
+				}
 			}
 
 			.remove-icon{
@@ -194,18 +223,24 @@ header{
 				position: absolute;
 				right:0;
 				text-decoration: none;
-				padding: 0.5em 1em 0.5em 0.5em;
+				padding: 0.25em 0.75em 0.25em 0.75em;
 				border: 1px solid $colour-secondary;
+				color: $colour-secondary;
 				border-radius: 3px;
 
 				&:hover{
 					background-color: $colour-secondary;
+					color:$colour-primary;
 				}
 
-				.inverted-colour{
+				.inverted-colour &{
+
+					border: 1px solid $colour-primary;
+					color: $colour-primary;
 
 					&:hover{
-
+						background-color: $colour-primary;
+						color:$colour-secondary;
 					}
 				}
 			}
