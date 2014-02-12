@@ -8,8 +8,12 @@
 <body>
 
 	<header>
-		<a href="#" id="btn_toggle_bgc" class="btn">dark/light</a>
-		<a href="#" id="btn_toggle_info" class="btn">info</a>
+		<div class="button-hold">
+			<div class="buttons">
+				<a href="#" id="btn_toggle_bgc" class="btn">dark/light</a>
+				<!-- <a href="#" id="btn_toggle_info" class="btn">info</a> -->
+			</div>
+		</div>
 	</header>
 
 	<div class="intro">
@@ -31,30 +35,40 @@
 
 	<div id="format-shell">
 	    <form action="" id="options-form">
-	    	<div>
-	    		<input type="radio" name="encoding" value="uri" id="encoding_uri" checked><label for="encoding_uri">uri encoded</label>
-	    	</div>
-	    	<div>
-	    		<input type="radio" name="encoding" value="b64" id="encoding_b64"><label for="encoding_b64">base 64</label>
-	    	</div>
+	    	<div class="options-form-shell">
+	    		<div class="form-row">
+	    		    		<h3>Select Encoding</h3>
 
-	    	<div>
-	    		<input type="radio" name="format" value="css" id="format_css"><label for="format_css">css</label>
+	    		    		<input type="radio" name="encoding" value="uri" id="encoding_uri" checked><label for="encoding_uri">uri encoded</label>
+	    		
+	    		 
+	    		    		<input type="radio" name="encoding" value="b64" id="encoding_b64"><label for="encoding_b64">base 64</label>
+	    		    		 
+	    		    	</div>
+	    				<div class="form-row">
+
+	    					<h3>Select Language</h3>
+	    		    	
+	    		    		<input type="radio" name="format" value="css" id="format_css"><label for="format_css">css</label>
+	    		    	
+	    	
+	    		    		<input type="radio" name="format" value="scss" id="format_scss" checked><label for="format_scss">scss</label>
+	    	
+	    	
+	    		    		<input type="radio" name="format" value="less" id="format_less" checked><label for="format_less">less</label>
+	    				</div>
+	    		    	<div class="form-row">
+	    	            	<input type="submit" value="Gimme Ma Code">
+	    	        	</div>
 	    	</div>
-	    	<div>
-	    		<input type="radio" name="format" value="scss" id="format_scss" checked><label for="format_scss">scss</label>
-	    	</div>
-	    	<div>
-	    		<input type="radio" name="format" value="less" id="format_less" checked><label for="format_less">less</label>
-	    	</div>
-	    	<div class="submit">
-            	<input type="submit" value="Gimme Ma Code">
-        	</div>
 	    </form>
 	</div>
 
 	<div id="outputs-shell">
-		<textarea id="output" cols="30" rows="10"></textarea>
+		<div class="holder">
+				<textarea id="output" cols="30" rows="10"></textarea>
+		
+		</div>
 	</div>   
     <script src="js/jquery-1.9.1.min.js" type="text/javascript"></script>
     <script src="js/svg-converter.js" type="text/javascript"></script>

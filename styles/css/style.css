@@ -226,15 +226,26 @@ header:before, header:after {
 header:after {
   clear: both;
 }
-header .btn {
+header .button-hold {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+}
+@media (max-width: 960px) {
+  header .button-hold .buttons {
+    margin-right: 5.208333333%;
+  }
+}
+header .button-hold .buttons .btn {
   color: #fafafa;
   font-size: 14px;
   font-family: "signikalight", Verdana, sans-serif;
   line-height: 1em;
-  margin: 0.5em 0 0.5em 0;
+  margin: 1em 0 0.5em 1em;
   float: right;
+  text-transform: uppercase;
 }
-.inverted-colour header .btn {
+.inverted-colour header .button-hold .buttons .btn {
   color: #1c1c1c;
 }
 .inverted-colour header {
@@ -250,7 +261,7 @@ header .btn {
   margin: 0 auto;
   border-top: 1px solid transparent;
   border-bottom: 1px solid #e1e1e1;
-  padding: 20px 0 55px 0;
+  padding: 0 0 0 0;
 }
 #data .svg-icon-shell:hover {
   cursor: pointer;
@@ -269,22 +280,30 @@ header .btn {
   border-bottom: 1px solid #474747;
   box-shadow: 0 0 5px #7a7a7a;
 }
+#data .svg-icon-shell .content-shell {
+  width: 100%;
+  max-width: 960px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0 auto;
+  position: relative;
+  padding: 20px 0 45px 0;
+  border-right: 1px solid #e1e1e1;
+  border-left: 1px solid #e1e1e1;
+}
 #data .svg-icon-shell .svg-icon {
   background-repeat: no-repeat;
   background-position: left top;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  padding: 0 4% 0 4%;
+  padding: 0 5.208333333% 0 5.208333333%;
   display: block;
-  width: 100%;
-  max-width: 960px;
   margin: 0 auto;
 }
 #data .svg-icon-shell .filename {
   display: block;
-  width: 100%;
-  max-width: 960px;
   margin: 0 auto;
   position: relative;
 }
@@ -321,7 +340,7 @@ header .btn {
 #data .svg-icon-shell .filename .remove-icon {
   display: none;
   position: absolute;
-  right: 0;
+  right: 5.208333333%;
   text-decoration: none;
   padding: 0.25em 0.75em 0.25em 0.75em;
   border: 1px solid #1c1c1c;
@@ -343,10 +362,87 @@ header .btn {
 
 #format-shell {
   display: none;
+  width: 100%;
+  border-bottom: 1px solid #e1e1e1;
+}
+#format-shell:before, #format-shell:after {
+  display: table;
+  content: " ";
+}
+#format-shell:after {
+  clear: both;
+}
+#format-shell form {
+  max-width: 960px;
+  margin: 0 auto;
+}
+#format-shell form:before, #format-shell form:after {
+  display: table;
+  content: " ";
+}
+#format-shell form:after {
+  clear: both;
+}
+#format-shell form .options-form-shell {
+  padding: 20px 5.208333333% 20px 5.208333333%;
+  border-right: 1px solid #e1e1e1;
+  border-left: 1px solid #e1e1e1;
+}
+#format-shell form .options-form-shell:before, #format-shell form .options-form-shell:after {
+  display: table;
+  content: " ";
+}
+#format-shell form .options-form-shell:after {
+  clear: both;
+}
+#format-shell form .form-row {
+  margin: 0 0 20px 0;
+  float: left;
+  width: 100%;
+}
+#format-shell form .form-row h3 {
+  display: block;
+  width: 100%;
+  float: left;
+  clear: both;
+}
+#format-shell form input[type="radio"] {
+  display: none;
+}
+#format-shell form input[type="radio"] + label {
+  display: block;
+  float: left;
+  padding: 0.25em 0.75em 0.25em 0.75em;
+  border: 1px solid #1c1c1c;
+  color: #1c1c1c;
+  background-color: #fafafa;
+}
+#format-shell form input[type="radio"] + label:hover {
+  cursor: pointer;
+  background-color: #1c1c1c;
+  color: #fafafa;
+}
+#format-shell form input[type="radio"]:checked + label {
+  background-color: #1c1c1c;
+  color: #949494;
 }
 
 #outputs-shell {
   display: none;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+}
+#outputs-shell .holder {
+  padding: 20px 5.208333333% 20px 5.208333333%;
+  border-right: 1px solid #e1e1e1;
+  border-left: 1px solid #e1e1e1;
+}
+#outputs-shell textarea {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
 }
 
 .shown {

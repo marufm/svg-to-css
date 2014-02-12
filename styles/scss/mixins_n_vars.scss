@@ -33,3 +33,9 @@ $colour-secondary-halftint: lighten($colour-secondary, 20%);
   -moz-box-sizing:border-box;
   box-sizing:border-box;
 }
+
+@mixin breakpoint($point) {
+  @if $point == cent_to_flush {
+    @media (max-width: 960px) { @content; }
+  }
+}

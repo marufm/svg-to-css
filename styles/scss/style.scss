@@ -128,18 +128,34 @@ header{
 
 	@include clearfix;
 
-	.btn{
-		color: $colour-primary;
-		font-size: 14px;
-		font-family: $font-stack-light;
-		line-height: 1em;
-		margin: 0.5em 0 0.5em 0;
-		float: right;
+	.button-hold{
+		width: 100%;
+		max-width: 960px;
+		margin: 0 auto;
+		.buttons{
 
-		.inverted-colour &{
-			color: $colour-secondary;
+			@include breakpoint(cent_to_flush){
+				margin-right: 5.208333333%;
+			}
+			
+			.btn{
+				color: $colour-primary;
+				font-size: 14px;
+				font-family: $font-stack-light;
+				line-height: 1em;
+				margin: 1em 0 0.5em 1em;
+				float: right;
+				text-transform: uppercase;
+
+				.inverted-colour &{
+					color: $colour-secondary;
+				}
+			}
 		}
 	}
+	
+
+
 
 	.inverted-colour &{
 		background-color: $colour-primary;
@@ -156,7 +172,7 @@ header{
 		margin: 0 auto;
 		border-top: 1px solid transparent;
 		border-bottom: 1px solid $colour-primary-halftint;
-		padding: 20px 0 55px 0;
+		padding: 0 0 0 0;
 
 		&:hover{
 			cursor: pointer;
@@ -179,22 +195,29 @@ header{
 			}
 		}
 
+		.content-shell{
+			width: 100%;
+			max-width: 960px;
+			@include box-sizing-borderbox;
+			margin: 0 auto;
+			position: relative;
+			padding: 20px 0 45px 0;
+			border-right: 1px solid $colour-primary-halftint;
+			border-left: 1px solid $colour-primary-halftint;
+		}
+
 		.svg-icon{
 			background-repeat: no-repeat;
 			background-position: left top;
 			@include box-sizing-borderbox;
-			padding: 0 4% 0 4%;
+			padding: 0 5.208333333% 0 5.208333333%;
 			display: block;
-			width: 100%;
-			max-width: 960px;
 			margin: 0 auto;
 		}
 
 		.filename{
 			display: block;
 			@include clearfix;
-			width: 100%;
-			max-width: 960px;
 			margin: 0 auto;
 			position: relative;
 
@@ -221,7 +244,7 @@ header{
 			.remove-icon{
 				display: none;
 				position: absolute;
-				right:0;
+				right:5.208333333%;
 				text-decoration: none;
 				padding: 0.25em 0.75em 0.25em 0.75em;
 				border: 1px solid $colour-secondary;
@@ -254,10 +277,84 @@ header{
 
 #format-shell{
 	display: none;
+	width: 100%;
+	border-bottom: 1px solid $colour-primary-halftint;
+	@include clearfix;
+
+	form{
+		max-width: 960px;
+		margin: 0 auto;
+		@include clearfix;
+
+
+		.options-form-shell{
+			padding: 20px 5.208333333% 20px 5.208333333%;
+			border-right: 1px solid $colour-primary-halftint;
+			border-left: 1px solid $colour-primary-halftint;
+			@include clearfix;
+		}
+
+		.form-row{
+			margin: 0 0 20px 0;
+			float: left;
+			width: 100%;
+
+			h3{
+				display: block;
+				width: 100%;
+				float: left;
+				clear: both;
+			}
+		}
+
+		
+		input[type="radio"] {
+		    display: none;
+
+		}
+
+		input[type="radio"] + label{
+			display: block;
+			float: left;
+			padding: 0.25em 0.75em 0.25em 0.75em;
+			border: 1px solid $colour-secondary;
+			color: $colour-secondary;
+			background-color: $colour-primary;
+
+			&:hover{
+				cursor: pointer;
+				background-color: $colour-secondary;
+				color: $colour-primary;
+			}
+		  
+		}
+
+		input[type="radio"]:checked + label{  
+		  background-color: $colour-secondary;
+		  color: darken($colour-primary, 40%);
+		}
+	}
+
 }
 
 #outputs-shell{
 	display: none;
+	width: 100%;
+	max-width: 960px;
+	margin: 0 auto;
+
+	.holder{
+		padding: 20px 5.208333333% 20px 5.208333333%;
+		border-right: 1px solid $colour-primary-halftint;
+		border-left: 1px solid $colour-primary-halftint;
+	}
+
+	textarea {
+		@include box-sizing-borderbox;
+
+		width: 100%;
+	}
+
 }
 
 .shown{

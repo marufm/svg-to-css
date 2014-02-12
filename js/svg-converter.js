@@ -127,24 +127,27 @@ var svgconverter = {
         // length should be greather than 0;
         var element_check = $('#' + svg_name);
         if( element_check.length == 0 ) {
-            
+            var shell = $('<div />', {class: "content-shell",});
             var icon = $('<div />', {class: "svg-icon",});
             //icon.css(svgconverter.create_css_str(post_svg_data));
             var button = $('<a title="Remove Icon" class="remove-icon" href="#!">Remove</a>').click(function(){
-                $(this).parent().parent().remove();
+                $(this).parent().parent().parent().remove();
             })
             var fname = $('<div class="filename"><p>' + svg_name + '</p></div>');
             var make_str = svgconverter.create_css_str(svg_data,"<uri></uri>");
             //icon.css(svgconverter.create_css_str(svg_data, "uri", "object"));
             icon.append(svg_data);
-            icon.appendTo(dom_element);
+            icon.appendTo(shell);
             button.appendTo(fname);
-            fname.appendTo(dom_element);
+            fname.appendTo(shell);
+            shell.appendTo(dom_element);
             
             dom_element.appendTo('#data');
         } else {
             //$( '#' + svg_name + '.svg-icon-shell').css( svgconverter.create_css_str( svg_data, "uri", "object") );
-            $( '#' + svg_name + '.svg-icon').html( svg_data );
+            var ele =  $( '#' + svg_name + '.svg-icon');
+            ele.html( svg_data );
+            ele.data("raw_svg_data", svg_data);
         }
     },
     
