@@ -1,1 +1,41 @@
-$font-stack-std: 'Arial', Helvetica, 'Helvetica Neue', sans-serif;
+$font-stack-std: 'signikaregular', Verdana, sans-serif;
+$font-stack-light: 'signikalight', Verdana, sans-serif;
+$font-stack-semibold: 'signikasemibold', Verdana, sans-serif;
+$font-stack-bold: 'signikabold', Verdana, sans-serif;
+
+$colour-primary: #FAFAFA;
+$colour-secondary: #1C1C1C;
+
+$colour-primary-halftint: darken($colour-primary, 10%);
+$colour-secondary-halftint: lighten($colour-secondary, 20%);
+
+@mixin clearfix{
+  &:before,
+  &:after{
+      display: table;
+      content: " ";
+  }
+
+  &:after{
+      clear: both;
+  }
+}
+
+@mixin transition-default($property){
+	-webkit-transition: $property 300ms;
+    -moz-transition: $property 300ms;
+    -o-transition: $property 300ms;
+    transition: $property 300ms;
+}
+
+@mixin box-sizing-borderbox{
+  -webkit-box-sizing:border-box;
+  -moz-box-sizing:border-box;
+  box-sizing:border-box;
+}
+
+@mixin breakpoint($point) {
+  @if $point == cent_to_flush {
+    @media (max-width: 960px) { @content; }
+  }
+}

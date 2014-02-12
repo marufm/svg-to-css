@@ -51,6 +51,9 @@ var svgconverter = {
                 thisEvent.stopPropagation();
                 thisEvent.preventDefault();
                 $(this).removeClass('over');
+
+                var optionsDiv = $('#format-shell');
+                var outputDiv = $('#outputs-shell');
                 // removes old svgs
                 //$('#data').html(' ');
                 var files = thisEvent.dataTransfer.files; // FileList object
@@ -71,11 +74,18 @@ var svgconverter = {
                     })(f);
                     // Read in the image file as a data URL.
                     reader.readAsText(f);
+
+                    if(i == 0){
+                        outputDiv.addClass('shown');
+                        optionsDiv.addClass('shown');
+                        $('body').addClass('iconed');
+                    }
                 }
 
 
 
             });
+
             
             $( "#options-form" ).on( "submit", function( event ) {
                 event.preventDefault();
@@ -96,6 +106,11 @@ var svgconverter = {
                 svgconverter.spitOutCss(encoding, format);
 
             });
+
+            $( "#btn_toggle_bgc" ).on("click", function(event){ 
+                event.preventDefault();
+                $('body').toggleClass('inverted-colour');
+            });
         
     },
     
@@ -112,21 +127,27 @@ var svgconverter = {
         // length should be greather than 0;
         var element_check = $('#' + svg_name);
         if( element_check.length == 0 ) {
-            
+            var shell = $('<div />', {class: "content-shell",});
             var icon = $('<div />', {class: "svg-icon",});
             //icon.css(svgconverter.create_css_str(post_svg_data));
-            var button = $('<a title="Remove Icon" class="remove-icon" href="#!"></a>').click(function(){
-                $(this).parent().parent().remove();
+            var button = $('<a title="Remove Icon" class="remove-icon" href="#!">Remove</a>').click(function(){
+                $(this).parent().parent().parent().remove();
             })
             var fname = $('<div class="filename"><p>' + svg_name + '</p></div>');
             var make_str = svgconverter.create_css_str(svg_data,"<uri></uri>");
-            icon.css(svgconverter.create_css_str(svg_data, "uri", "object"));
-            icon.appendTo(dom_element);
-            fname.appendTo(dom_element);
-            button.appendTo(dom_element);
+            //icon.css(svgconverter.create_css_str(svg_data, "uri", "object"));
+            icon.append(svg_data);
+            icon.appendTo(shell);
+            button.appendTo(fname);
+            fname.appendTo(shell);
+            shell.appendTo(dom_element);
+            
             dom_element.appendTo('#data');
         } else {
-            $( '#' + svg_name + '.svg-icon-shell').css( svgconverter.create_css_str( svg_data, "uri", "object") );
+            //$( '#' + svg_name + '.svg-icon-shell').css( svgconverter.create_css_str( svg_data, "uri", "object") );
+            var ele =  $( '#' + svg_name + '.svg-icon');
+            ele.html( svg_data );
+            ele.data("raw_svg_data", svg_data);
         }
     },
     
