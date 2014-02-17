@@ -16,12 +16,11 @@ Well to break it down:
 
 1. **Use html5 drag-n-drop api to get content of the files**
 	
-	I used this [html5 rocks guide](http://www.html5rocks.com/en/tutorials/dnd/basics/)
+	I used this [html5 rocks guide](http://www.html5rocks.com/en/tutorials/dnd/basics/) to get access to the data for js fiddling
 
 2. **Escape & process svg data into**
 	
 	Using the SVG data I give the option to escape it using `encodeURIComponent()` for uri escaped data and `btoa()` for base64 data
-
 
 ### Why does this exist? Y U NO use grumpicon or grunt?
 
