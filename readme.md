@@ -18,7 +18,7 @@ Well to break it down:
 
 1. **Use html5 drag-n-drop api to get content of the files**
 	
-	I used this [html5 rocks guide](http://www.html5rocks.com/en/tutorials/dnd/basics/) to get access to the data for js fiddling
+	I used this [html5 rocks guide](http://www.html5rocks.com/en/tutorials/file/dndfiles/) to get access to the data for js fiddling
 
 2. **Escape svg data**
 	
@@ -36,4 +36,11 @@ Well to break it down:
 
 ### Why does this exist? Y U NO use grumpicon or grunt?
 
-I made the very first version of this while working in an agency in 2013. I was really desperate for an automated svg production method. At that time I didnt even know grunt/node/grumpicon existed.
+My intention was: 
+
+1. To automate the process of getting svg->css as much as possible. I was at a point where I was doing svg->css but manually for each icon. I hit a project that involved 100+ icon instances.
+
+2. Make the process as easy and least bit 'code-y' so non-developer users could use it (esp non code-savvy designers)
+
+I made the very first version of this while working in an agency in 2013. I was really desperate for an automated svg production method. At that time I didnt even know grunt/grumpicon/node existed.
+
