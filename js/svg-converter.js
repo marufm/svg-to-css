@@ -202,14 +202,19 @@ var svgconverter = {
 
             switch (format){
                 case "css":
-                    final_string = '.' + svg_name + '{background-image:url("data:image/svg+xml,' + processed_svg_data + '");}\n';
-                    final_string += '.no-svg .' + svg_name + '{background-image:url(../PNG_DIRECTORY/'+ svg_name +'.png)}'; 
+                    final_string = '.' + svg_name + '{background-image:url("data:image/svg+xml,' + processed_svg_data + '");\n';
+                    final_string += 'background-repeat:no-repeat;}\n';
+                    final_string += '.no-svg .' + svg_name + '{background-image:url(../PNG_DIRECTORY/'+ svg_name +'.png);background-repeat:no-repeat;}\n'; 
                     break;
                 case "scss":
-                    final_string = '.' + svg_name + '{background-image:url("data:image/svg+xml,' + processed_svg_data + '");}';
+                    final_string = '@mixin ' + svg_name + '{background-image:url("data:image/svg+xml,' + processed_svg_data + '");\n';
+                    final_string += 'background-repeat:no-repeat;\n';
+                    final_string += '.no-svg & {background-image:url(../IMAGE_DIRECTORY/' + svg_name + '.png);}\n}'
                     break;
                 case "less":
-                    final_string = '.' + svg_name + '{background-image:url("data:image/svg+xml,' + processed_svg_data + '");}';
+                    final_string = '.' + svg_name + '{background-image:url("data:image/svg+xml,' + processed_svg_data + '");\n';
+                    final_string += 'background-repeat:no-repeat;\n';
+                    final_string += '.no-svg & {background-image:url(../IMAGE_DIRECTORY/' + svg_name + '.png);}\n}'
                     break;
             }
 
