@@ -16,7 +16,11 @@ Well to break it down:
 
 1. **Use html5 drag-n-drop api to get content of the files**
 	
+<<<<<<< HEAD
 	I used this [html5 rocks guide](http://www.html5rocks.com/en/tutorials/dnd/basics/) to help me get the data accessable to my js
+=======
+	I used this [html5 rocks guide](http://www.html5rocks.com/en/tutorials/dnd/basics/)
+>>>>>>> Production
 
 2. **Escape & process svg data into**
 	
