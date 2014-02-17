@@ -14,8 +14,14 @@ This browser based tool will take your svg files and create embeddable css/scss/
 
 Well to break it down:
 
-1. Use drag-n-drop api to get content of the files.
-2. Escape & process svgs
+1. **Use html5 drag-n-drop api to get content of the files**
+	
+	I used this [html5 rocks guide](http://www.html5rocks.com/en/tutorials/dnd/basics/)
+
+2. **Escape & process svg data into**
+	
+	Using the SVG data I give the option to escape it using `encodeURIComponent()` for uri escaped data and `btoa()` for base64 data
+
 
 ### Why does this exist? Y U NO use grumpicon or grunt?
 
