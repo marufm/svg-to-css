@@ -2,9 +2,11 @@
 
 This browser based tool will take your svg files and create embeddable css/scss/less for you.
 
+### [Demo](http://moistpaint.github.io/svg-to-css/)
+
 ### How Do I Use it?
 
-1. Fork, Download, Open up little app in your modern browser of choice.
+1. Clone, Download, [Open up](http://moistpaint.github.io/svg-to-css/) little app in your modern browser of choice.
 2. Drag-n-Drop your svg icons into the browser window
 3. Check your svgs and remove if you need to
 4. Select your encoding and language
